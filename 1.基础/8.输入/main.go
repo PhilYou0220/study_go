@@ -33,13 +33,13 @@ func main() {
 	//fmt.Println(name,age)
 	//fmt.Println(n,err)
 
-	//fmt.Scanf() 用法基本一致 是在等待回车
+	//fmt.Scanf() 用法基本一致 是在等待回车 但是需要输入模板才行 如 我叫%s 今年%d 岁 提取关键位置参数
 	fmt.Print("请输入姓名：")
 	var (
 		name string
 		age int
 	)
-
+	
 	n,err :=fmt.Scanf("我叫%s 今年%d 岁",&name,&age)
 	fmt.Println(name,age)
 	fmt.Println(n,err)
