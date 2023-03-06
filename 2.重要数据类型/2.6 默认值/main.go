@@ -12,4 +12,5 @@ func main() {
 	function类型
 	channel类型
 	interface类型*/
+
 }
