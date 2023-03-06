@@ -7,8 +7,8 @@ func main() {
 
 	//(1)获取地址 &
 	var a = 10
-	//fmt.Println(&a)
-	//fmt.Printf("地址为：%p \n", &a)
+	fmt.Println(&a)
+	fmt.Printf("地址为：%p \n", &a)
 	////(2)地址 声明 赋值
 	var p *int // p为整型指针变量 这个根据你要取的地址的值的类型确定 如果是string 就要定义为*string
 	p=&a
@@ -29,9 +29,9 @@ func main() {
 	//**v3 =200
 	//fmt.Println(v1)
 
-	p1 := 1
-	p2 :=&p1
-	*p2++ //先取值，再相加
-	fmt.Println(p1)
+	//p1 := 1
+	//p2 :=&p1
+	//*p2++ //先取值，再相加
+	//fmt.Println(p1)
 
 }

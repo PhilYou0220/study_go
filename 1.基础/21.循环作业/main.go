@@ -106,7 +106,7 @@ func main() {
 
 	//求1-10的阶乘 可以分析并得出结论 经典题
 	re := 0
-	for i:=1;i<=10;i++{
+	for i:=1;i<=3;i++{
 		tmp :=1
 		for j:=i;j>1;j--{
 			tmp = tmp*j
