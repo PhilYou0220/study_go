@@ -16,7 +16,6 @@ func main() {
 	fmt.Printf("%p \n",&a) //切片的地址
 
 
-
 	// 练习题
 	a := make([]int,3,10)
 	fmt.Println(a) //[0 0 0]
