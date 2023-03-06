@@ -6,8 +6,10 @@ func main() {
 	//切片的 使用同一个变量 长度和容量重新写入
 	var s = []int{1, 2, 3}
 	fmt.Printf("%p \n", &s)        //0xc000096440
-	fmt.Println(s, len(s), cap(s)) //[1 2 3] 3 3
+	fmt.Println(s, len(s), cap(s)) //[1 2 3] 3
+	fmt.Println(&s[0]) //未扩容前的0号元素的地址
 	s = append(s, 4)
+	fmt.Println(&s[0]) // 扩容后生成了一个新的数组
 	fmt.Printf("%p\n", &s)         //0xc000096440
 	fmt.Println(s, len(s), cap(s)) //[1 2 3 4] 4 6
 

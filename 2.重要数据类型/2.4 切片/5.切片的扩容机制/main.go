@@ -5,13 +5,18 @@ import "fmt"
 func main() {
 
 	//扩容
-	//a := []int{11,22,33}
-	//fmt.Println(len(a),cap(a))//3,3
+	a := []int{11,22,33}
+	fmt.Println(len(a),cap(a))//3,3
 	//c:=append(a,44) //出现扩容，双倍扩容 生成一个新的数组
-	//
+	fmt.Printf("%p \n",a)   // 直接打印是第一个切片的内存地址
+	fmt.Println(&a[0]) // 第一个元素的的的内存地址
+	fmt.Printf("%p \n",&a[0]) // 第一个元素的的的内存地址
+	fmt.Printf("%p \n",&a) //切片的地址
+
+
 	//a[0]=100
 	//fmt.Println(a) //[100 22 33]
-	//fmt.Println(c,len(c),cap(c)) // [11 22 33 44] 4 6
+	//fmt.Println(c,len(c),cap(c),&c[0]) // [11 22 33 44] 4 6
 
 	// 练习题
 	//a := make([]int,3,10)
