@@ -23,7 +23,7 @@ func main() {
 	//case3 闭包函数
 	x := 10
 	defer func() {
-		fmt.Println(x)   // 保留x的地址没传参数进来 就去找闭包的x的值
+		fmt.Println(x)   // 保留x的地址没传参数进来 只传了值 就去找闭包的x的值
 	}() //11
 	x++
 }

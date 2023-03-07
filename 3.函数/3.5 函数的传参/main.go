@@ -1,7 +1,7 @@
 package main
 
 import "fmt"
-
+//记住函数传参是拷贝值 切片扩容后切片的地址变了 切片存的地址也变了
 func  foo(a []int)  {
 	a[0]=100
 	a = append(a, 4)

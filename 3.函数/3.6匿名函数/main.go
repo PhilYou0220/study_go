@@ -6,7 +6,7 @@ import (
 )
 
 func foo(){
-	//Go语言不支持在函数内部声明普通函数，只能声明匿名函数。
+	//Go语言不支持在函数内部声明普通函数，只能声明匿名函数。匿名函数没有返回值
 	var bar func(int,int) int//声明一个参数为int,int返回值为int的函数类型
 	bar = func (x int,y int)int {
 		return 100
