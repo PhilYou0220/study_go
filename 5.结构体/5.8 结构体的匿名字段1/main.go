@@ -13,6 +13,6 @@ type Person struct{
 
 func main() {
 	p1 := Person{"fei",18}
-	fmt.Print(p1)
+	fmt.Print(p1) //{fei 18}
 
 }

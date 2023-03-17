@@ -38,6 +38,6 @@ func main() {
 	
 	//反序列化
 	var Per Person
-	_=json.Unmarshal(p1Json,&Per)
+	_=json.Unmarshal(p1Json,&Per) //参数一反序列化哪个[]byte，参数二 把go类型的值赋值给谁
 	fmt.Println(Per)
 }

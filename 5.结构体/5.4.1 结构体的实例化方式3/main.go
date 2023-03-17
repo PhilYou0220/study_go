@@ -20,6 +20,12 @@ func main() {
 	fmt.Println(s1.sid) //1002
 	s2 := s1
 	s2.sid=1
+	s2.course[1]="a"
+	fmt.Println(s1.course) //都会被修改
+	fmt.Println(s2.course) //会被修改 切片是引用类型
+
 	initSid(&s1) //传地址就能改了
 	fmt.Println(s1.sid) //0
+	fmt.Println(s2.sid)
+
 }

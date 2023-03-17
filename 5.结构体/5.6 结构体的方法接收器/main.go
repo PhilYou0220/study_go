@@ -8,7 +8,9 @@ type Student struct {
 	age    int
 	course []string
 }
-//这是方法不是函数 和python很像 类里的叫方法 类外的叫函数
+//这是方法不是函数 和python很像 类里的叫方法 类外的叫函数，可以继承
+//这是个方法接收器 属于Student的 s的是来完成拷贝用的（值拷贝 引用拷贝都是拷贝对应的值有的值是地址而已）
+//当使用s.read时会发生值拷贝
 func (s Student)read(){
 	fmt.Printf("我在读书\n")
 }

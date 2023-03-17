@@ -24,5 +24,11 @@ func main() {
 			第三行
 			`
 	fmt.Println(s1)
-
+	//%v	值的默认格式表示
+	//%+v	类似%v，但输出结构体时会添加字段名
+	//%#v	值的Go语法表示
+	test1 := map[string]string{"name":"you","age":"18"}
+	fmt.Printf("%v\n",test1) //map[age:18 name:you]
+	fmt.Printf("%+v\n",test1) //map[age:18 name:you]
+	fmt.Printf("%#v\n",test1) //map[string]string{"age":"18", "name":"you"}
 }
