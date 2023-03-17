@@ -1,5 +1,5 @@
-module 8gomoudule
+module test
 
-go 1.18
+go 1.14
 
 require github.com/jinzhu/now v1.1.5
