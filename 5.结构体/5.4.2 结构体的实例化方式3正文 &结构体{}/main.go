@@ -21,6 +21,7 @@ func main() {
 	fmt.Println(s1.sid) //1002 go的语法糖支持把结构体*p写成p 因此可以看成*s1.sid
 	s2 := s1
 	s2.sid=1
+	fmt.Println(s1.sid) //1
 	initSid(s1) //传地址就能改了
 	fmt.Println(s1.sid) //0
 }

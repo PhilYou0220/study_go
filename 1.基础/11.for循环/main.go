@@ -1,8 +1,9 @@
 package main
 
 import "fmt"
-
+//for range 可以遍历数组、切片、字符串、map 及通道（channel） 不能循环struct
 func main() {
+
 	//死循环
 	//for  {
 	//	fmt.Println("狗狗")

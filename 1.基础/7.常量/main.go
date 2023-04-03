@@ -1,6 +1,9 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+	"reflect"
+)
 
 // 常量一般放在顶部作为全局常量
 
@@ -26,11 +29,19 @@ func main() {
 	)
 	fmt.Println(va,la,vi)
 
-	// iota(默认为0)
+	// iota(默认为0) 第一个 iota 等于 0，每当 iota 在新的一行被使用时，它的值都会自动加 1，当遇到被赋予其他值时会直接跳过
 	const (
 		v1 = iota+100
 		_
 		v2
 	)
 	fmt.Println(v1,v2)  // 100 102
+
+
+	const (
+		a = iota
+		b = iota
+		c = iota
+	)
+	fmt.Println(a,b,c,reflect.TypeOf(a)) //0 1 2 int
 }

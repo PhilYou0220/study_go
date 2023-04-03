@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<p>取所有值</p>
+<li>{{.}}</li>
+<p>取某个值</p>
+<li>{{.name}}</li>
+<p>取切片的索引</p>
+<li>{{index .books 0}}</li>
+<p>map取值</p>
+<li>{{.stu_map.name}}</li>
+<p>struct取值</p>
+<li>{{.Person.Name}}</li>
+<p>管道(age会传到 %v 这个地方)</p>
+<li>{{.Person.Age | printf "姓名：%s\n 年龄：%v" "yuan" }}</li>
+
+<h3>条件判断 </h3>
+{{/*结尾需要写{{end}}} django是 {{endif}} {{endfor}}*/}}
+{{if eq .Person.Age 18}}
+    {{index .books 0}}
+{{else if lt .Person.Age 18}}
+    <p>这是else if</p>
+{{end}}
+
+<h3>循环判断</h3>
+{{/*<h3> 变量复制使用$符号</h3>*/}}
+{{range $key,$value := .stu_map}}
+<p>{{$key}}: {{$value}}</p>
+{{end}}
+{{/*先取到切片在进行操作*/}}
+{{range $value := .person2}}
+    <p> {{$value.Name}}</p>
+{{end}}
+
+
+{{/*<p>person2 := []Person{{Name:"you",Age:19},{Name:"san",Age:20}}"</p>*/}}
+<h3>在range循环里面使用全局变量需要重新赋值 他是取不到 </h3>
+{{$localname := .name}}
+<p>{{index .books 0}}</p>
+{{$localbook := .books}}
+
+{{range $value := .person2}}
+    <p> {{$value.Name}}</p>
+
+{{if eq $value.Name $localname}}
+    {{index $localbook 0}}
+{{else if eq $value.Age 18}}
+    <p>这是else if</p>
+{{end}}
+
+{{end}}
+
+</body>
+</html>

@@ -23,4 +23,5 @@ func main() {
 	p1.Addr.history() //这是一座历史悠久的城市
 	p1.history() // 可以直接调用
 
+
 }

@@ -18,6 +18,7 @@ func main() {
 	for true {
 		//获取客户端套接字对象，三次握手
 		fmt.Println("server is waiting...")
+		//服务端开始监听 接收客户端套接字对象（内存地址是一样的）
 		conn, err := listener.Accept()
 		if err != nil {
 			panic("连接失败！")
@@ -25,7 +26,8 @@ func main() {
 
 		//接受客户端消息
 		data := make([]byte, 1024)
-		n, err := conn.Read(data)
+
+		n, err := conn.Read(data) //写入data n是指长度
 		fmt.Printf("data:%s\n", string(data[:n]))
 
 		//返回信息 需要符合响应协议格式才行 因为是windows所以换行符是\r\n linux上就是\r

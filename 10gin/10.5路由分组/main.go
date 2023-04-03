@@ -21,7 +21,7 @@ func main()	{
 
 
 	//初始化路由
-	InitRoute(r)
+	InitBookRoute(r)
 	//启动：默认本机8080端口
 	r.Run("127.0.0.1:8081")
 }

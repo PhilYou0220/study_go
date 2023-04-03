@@ -9,7 +9,7 @@ func main() {
 	// 字符都是单引号 byte
 	//byte 只能是ascii的那256的数字
 	var x byte //go语言中byte就是unit8(0-255) 8bit 所以是值类型
-	x = 'a'
+	x = 'a' //
 	fmt.Println(x, reflect.TypeOf(x)) //97 uint8
 
 	fmt.Printf("%c\n", x) //a c:char 显示字符

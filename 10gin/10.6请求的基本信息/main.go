@@ -27,7 +27,7 @@ func main() {
 		//所有请求头
 		fmt.Println("所有头：", context.Request.Header) //map[Accept-Encoding:[gzip, deflate, br]]
 		//获取远程主机地址
-		fmt.Println("", context.Request.RemoteAddr)   // 127.0.0.1:50429
+		fmt.Println("", context.Request.RemoteAddr)   // 127.0.0.1:50429 带端口
 		fmt.Println("RemoteIP: ", context.RemoteIP()) //127.0.0.1
 		fmt.Println("ClientIP: ", context.ClientIP()) //127.0.0.1
 
