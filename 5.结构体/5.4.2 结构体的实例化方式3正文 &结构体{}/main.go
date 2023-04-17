@@ -18,6 +18,9 @@ func initSid(p *Student){ //结构体也能作为参数传递，p为结构体指
 func main() {
 	//赋值并取地址 &Student可以直接修改原始数据  Student是不行的
 	s1 := &Student{sid: 1002, name: "rain", course: []string{"chinese", "math", "english"}}
+	fmt.Println(s1) //其实是*p
+	fmt.Println(&s1) //这个才是取地址
+
 	fmt.Println(s1.sid) //1002 go的语法糖支持把结构体*p写成p 因此可以看成*s1.sid
 	s2 := s1
 	s2.sid=1

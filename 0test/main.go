@@ -1,12 +1,15 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+	"time"
+)
 
-func main()  {
-	var arr []int
+func main() {
+	var arr = make([]int,5)
 	fmt.Println(arr)
-	arr[0]=100
-	fmt.Println(arr) //panic: runtime error: index out of range [0] with length 0
-	arr1 :=
-}
 
+	fmt.Println(arr,len(arr),cap(arr)) //panic: runtime error: index out of range [0] with length 0
+	fmt.Println(time.Now())
+
+}

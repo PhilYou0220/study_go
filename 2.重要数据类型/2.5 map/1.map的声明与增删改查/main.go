@@ -1,7 +1,7 @@
 package main
 
 import "fmt"
-
+//相当于python中的字典 map_name =map[key_type]value_type
 func main() {
 	//map的声明并初始化 map没有索引 无序的
 	var stu01 = map[string]string{"name":"you","age":"18"} //

@@ -1,7 +1,7 @@
 package main
 
 import "fmt"
-//会直接初始化
+//会直接初始化几次继承后的结构体
 type Addr struct {
 	province string
 	city     string
@@ -16,4 +16,5 @@ type Person struct {
 
 func main()  {
 	fmt.Printf("%+v",&Person{})
+	fmt.Printf("%p",&Person{})
 }
