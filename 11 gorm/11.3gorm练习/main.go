@@ -1,6 +1,5 @@
 package main
 
-//下载
 import (
 	"fmt"
 	"gorm.io/driver/mysql"
@@ -11,35 +10,18 @@ import (
 	"time"
 )
 
-//创建模型类，抽象公共字段
-type BaseModel struct {
-	ID int `gorm:"primaryKey;autoIncrement"`
-	Name string `gorm:"type:varchar(32);unique;not null"`
-	CreateTime *time.Time `gorm:"autoCreateTime"`
-	UpdateTime *time.Time `gorm:"autoCreateTime"`
-}
-
-type Teacher struct{
-	BaseModel
-	Sno int
-	Pwd string `gorm:"type:varchar(100);not null"`
-	Tel string `gorm:"type:char(11);"`
-	Birth *time.Time
+type Teacher struct {
+	Id     int `gorm:"primaryKey;autoIncrement;comment:主键id"` //所谓蛇形复数
+	Tno    int `gorm:"default:0"`
+	Name   string `gorm:"type:varchar(10);not null"`
+	Pwd    string `gorm:"type:varchar(100);not null"`
+	Tel    string `gorm:"type:char(11);column:my_name"`
+	Birth  *time.Time //它的零值（默认值）将是time.Time{}，而不是 nil，因为 time.Time 是值类型，它的默认值是其零值。如果你想要在这个字段中存储 NULL 值，就需要使用 *time.Time 类型，并将其设置为 nil。
 	Remark string `gorm:"type:varchar(255);"`
 }
-//默认引擎表名会加复数，若不想使用默认引擎  函数名称为TableName 继承Teacher结构体 返回 什么 表的名字就是什么
-//func (t Teacher)TableName() string  {
-//	return "teacher"
-//}
-type Class struct {
-	BaseModel //继承基础表
-	Tno int
-	Pwd string `gorm:"type:varchar(100);not null"`
-	Birth *time.Time
-	Remark string `gorm:"type；varchar(255);"`
 
-}
-func main() {
+//var db = DBInit()
+func DBInit() *gorm.DB {
 	// 创建数据库链接
 	//parseTime=True：将 MySQL 中的时间类型（如 datetime、timestamp 等）解析为 Go 中的时间类型（time.Time）。如果不设置此参数，查询出来的时间类型会是 []uint8，需要手动转换为 time.Time。
 	//loc=Local：指定时区为本地时区。如果不设置此参数，时间会被转换为 UTC 时间，需要手动转换为本地时区
@@ -53,18 +35,33 @@ func main() {
 	)
 
 	//db接收*gorm.DB 类型的对象 gorm.Config{} 是 gorm.Open 函数的第二个参数，用于指定 GORM 库的一些配置
-	db, err := gorm.Open(mysql.Open(dsn), &gorm.Config{Logger: newLogger}) //配置了日志器
-	fmt.Println(db, err)
-
-	// 关闭数据库链接
-	sqlDB, err := db.DB()
-	if err != nil {
-		panic(err)
-	}
-	defer sqlDB.Close()
-
+	db, _ := gorm.Open(mysql.Open(dsn), &gorm.Config{Logger: newLogger}) //配置了日志器
+	//fmt.Println(db, err)
 	//迁移模型类 模型转换为sql 创建表执行创表语句
+
+	// 自动迁移
 	db.AutoMigrate(&Teacher{})
+
+
+	return db
 
 }
 
+func main() {
+	db := DBInit()
+
+	now := time.Now()
+	t1 := Teacher{
+		Tno:    001,
+		Name:   "游",
+		Pwd:    "123",
+		Tel:    "136",
+		Birth:  &now,
+		Remark: "第一位老师",
+	}
+	//新增数据
+	res:=db.Create(&t1)
+	fmt.Println(t1) // 可以返回修改后的t1 {4 1 游 123 136 2023-04-24 14:15:57.6376609 +0800 CST m=+5.949186501 第一位老师}
+	fmt.Println("错误：",res.Error) //错误： <nil>
+	fmt.Println("影响行数：",res.RowsAffected) //影响行数： 1
+}

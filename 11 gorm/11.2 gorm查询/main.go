@@ -11,8 +11,9 @@ import (
 	"time"
 )
 
-//创建模型类，抽象公共字段
+//创建模型类，抽象公共字段，对于此模型类还有一个 gorm.Model的公共字段
 type BaseModel struct {
+	//gorm.Model
 	ID         int        `gorm:"primaryKey"`
 	Name       string     `gorm:"type:varchar(32);unique;not null"`
 	CreateTime *time.Time `gorm:"autoCreateTime"`
