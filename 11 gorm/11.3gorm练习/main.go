@@ -1,6 +1,7 @@
 package main
 
 import (
+	"errors"
 	"fmt"
 	"gorm.io/driver/mysql"
 	"gorm.io/gorm"
@@ -11,14 +12,14 @@ import (
 )
 
 type Teacher struct {
-	Id     int `gorm:"primaryKey;autoIncrement;comment:主键id"` //所谓蛇形复数
-	Tno    int `gorm:"default:0"`
-	Name   string `gorm:"type:varchar(10);not null"`
-	Pwd    string `gorm:"type:varchar(100);not null"`
-	Tel    string `gorm:"type:char(11);column:my_name"`
-	Birth  *time.Time //它的零值（默认值）将是time.Time{}，而不是 nil，因为 time.Time 是值类型，它的默认值是其零值。如果你想要在这个字段中存储 NULL 值，就需要使用 *time.Time 类型，并将其设置为 nil。
-	Remark string `gorm:"type:varchar(255);"`
-	CreatTime *time.Time `gorm:"autoCreateTime;default null"`
+	Id          int        `gorm:"primaryKey;autoIncrement;comment:主键id"` //所谓蛇形复数
+	Tno         int        `gorm:"default:0"`
+	Name        string     `gorm:"type:varchar(10);not null"`
+	Pwd         string     `gorm:"type:varchar(100);not null"`
+	Tel         string     `gorm:"type:char(11);column:my_name"`
+	Birth       *time.Time //它的零值（默认值）将是time.Time{}，而不是 nil，因为 time.Time 是值类型，它的默认值是其零值。如果你想要在这个字段中存储 NULL 值，就需要使用 *time.Time 类型，并将其设置为 nil。
+	Remark      string     `gorm:"type:varchar(255);"`
+	CreatTime   *time.Time `gorm:"autoCreateTime;default null"`
 	DeletedTime *time.Time `gorm:"default null"`
 	UpdateTime  *time.Time `gorm:"autoUpdateTime;default null"`
 }
@@ -45,7 +46,6 @@ func DBInit() *gorm.DB {
 	// 自动迁移
 	db.AutoMigrate(&Teacher{})
 
-
 	return db
 
 }
@@ -53,18 +53,43 @@ func DBInit() *gorm.DB {
 func main() {
 	db := DBInit()
 
-	now := time.Now()
-	t1 := Teacher{
-		Tno:    001,
-		Name:   "游",
-		Pwd:    "123",
-		Tel:    "136",
-		Birth:  &now,
-		Remark: "第一位老师",
-	}
-	//新增数据
-	res:=db.Create(&t1)
-	fmt.Println(t1) // 可以返回修改后的t1 {4 1 游 123 136 2023-04-24 14:15:57.6376609 +0800 CST m=+5.949186501 第一位老师}
-	fmt.Println("错误：",res.Error) //错误： <nil>
-	fmt.Println("影响行数：",res.RowsAffected) //影响行数： 1
+	//now := time.Now()
+	//t1 := Teacher{
+	//	Tno:    001,
+	//	Name:   "游",
+	//	Pwd:    "123",
+	//	Tel:    "136",
+	//	Birth:  &now,
+	//	Remark: "第一位老师",
+	//}
+	////新增单条数据
+	//res := db.Create(&t1)
+	//fmt.Println(t1)                        // 可以返回修改后的t1 {4 1 游 123 136 2023-04-24 14:15:57.6376609 +0800 CST m=+5.949186501 第一位老师}
+	//fmt.Println("错误：", res.Error)          //错误： <nil>
+	//fmt.Println("影响行数：", res.RowsAffected) //影响行数： 1
+	////创建多条记录
+	//t2 := Teacher{
+	//	Tno:    002,
+	//	Name:   "fei",
+	//	Pwd:    "1234",
+	//	Tel:    "1360",
+	//	Birth:  &now,
+	//	Remark: "第二位老师",
+	//}
+	//teachers := []Teacher{t1, t2}
+	//db.Create(&teachers)
+	//fmt.Println(teachers)
+
+
+	//查询
+	teacher :=Teacher{} //实例化一个零值得结构体 代表那张表
+
+	res:=db.First(&teacher)
+	fmt.Println("一条查询结果：",teacher)
+	teacher1 :=Teacher{}
+	db.Last(&teacher1)
+	fmt.Println("最后一条查询结果：",teacher1)
+	// 检查 ErrRecordNotFound 错误
+	errors.Is(res.Error, gorm.ErrRecordNotFound)
+
 }
