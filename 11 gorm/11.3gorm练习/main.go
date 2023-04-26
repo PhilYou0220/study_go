@@ -18,6 +18,9 @@ type Teacher struct {
 	Tel    string `gorm:"type:char(11);column:my_name"`
 	Birth  *time.Time //它的零值（默认值）将是time.Time{}，而不是 nil，因为 time.Time 是值类型，它的默认值是其零值。如果你想要在这个字段中存储 NULL 值，就需要使用 *time.Time 类型，并将其设置为 nil。
 	Remark string `gorm:"type:varchar(255);"`
+	CreatTime *time.Time `gorm:"autoCreateTime;default null"`
+	DeletedTime *time.Time `gorm:"default null"`
+	UpdateTime  *time.Time `gorm:"autoUpdateTime;default null"`
 }
 
 //var db = DBInit()
