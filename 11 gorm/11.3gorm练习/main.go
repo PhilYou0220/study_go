@@ -1,7 +1,7 @@
 package main
 
 import (
-	"errors"
+	//"errors"
 	"fmt"
 	"gorm.io/driver/mysql"
 	"gorm.io/gorm"
@@ -83,13 +83,17 @@ func main() {
 
 	//查询
 	teacher :=Teacher{} //实例化一个零值得结构体 代表那张表
-
-	res:=db.First(&teacher)
-	fmt.Println("一条查询结果：",teacher)
+	db.First(&teacher)
+	fmt.Println("一条查询结果：",teacher) // SELECT * FROM `teachers` ORDER BY `teachers`.`id` LIMIT 1
 	teacher1 :=Teacher{}
 	db.Last(&teacher1)
-	fmt.Println("最后一条查询结果：",teacher1)
+	fmt.Println("最后一条查询结果：",teacher1) //SELECT * FROM `teachers` ORDER BY `teachers`.`id` DESC LIMIT 1
 	// 检查 ErrRecordNotFound 错误
-	errors.Is(res.Error, gorm.ErrRecordNotFound)
+	//errors.Is(res.Error, gorm.ErrRecordNotFound)
+	var teacher2 []Teacher //查所有的需要一个结构体类型的切片 把所有数据返回出来
+	db.Find(&teacher2) //SELECT * FROM `teachers`
+	fmt.Println(teacher2)
+
+	//db.Where()
 
 }
