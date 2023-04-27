@@ -82,6 +82,7 @@ func main() {
 
 
 	//查询
+	/*
 	teacher :=Teacher{} //实例化一个零值得结构体 代表那张表
 	db.First(&teacher)
 	fmt.Println("一条查询结果：",teacher) // SELECT * FROM `teachers` ORDER BY `teachers`.`id` LIMIT 1
@@ -93,7 +94,14 @@ func main() {
 	var teacher2 []Teacher //查所有的需要一个结构体类型的切片 把所有数据返回出来
 	db.Find(&teacher2) //SELECT * FROM `teachers`
 	fmt.Println(teacher2)
+	*/
 
-	//db.Where()
+	var teacher3 Teacher //扫描到结构体里
+	db.Model(&Teacher{}).First(&teacher3) //这才是常用的吧
+	fmt.Println("db毛豆",teacher3)
+
+	res := map[string]interface{}{} //扫描到map里
+	db.Model(&Teacher{}).First(&res)
+	fmt.Println(res) //这可以把结果扫描到map里 相当于字典 map[birth:2023-04-24 14:19:17.364 +0800 CST creat_time:<nil> deleted_time:<nil> id:1 my_name:136 name:游 pwd:123 remark:第一位老师 tno:1 update_time:<nil>]
 
 }
