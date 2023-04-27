@@ -96,6 +96,7 @@ func main() {
 	fmt.Println(teacher2)
 	*/
 
+	/*使用db.Model指定表名，扫描 map[string]interface{}{}
 	var teacher3 Teacher //扫描到结构体里
 	db.Model(&Teacher{}).First(&teacher3) //这才是常用的吧
 	fmt.Println("db毛豆",teacher3)
@@ -103,5 +104,12 @@ func main() {
 	res := map[string]interface{}{} //扫描到map里
 	db.Model(&Teacher{}).First(&res)
 	fmt.Println(res) //这可以把结果扫描到map里 相当于字典 map[birth:2023-04-24 14:19:17.364 +0800 CST creat_time:<nil> deleted_time:<nil> id:1 my_name:136 name:游 pwd:123 remark:第一位老师 tno:1 update_time:<nil>]
+	*/
+
+	/*where 条件查询 find 放在最后就好*/
+	res1 := map[string]interface{}{}
+	name := "游"
+	db.Model(&Teacher{}).Where("name=?",name).Where("id=?",1).Limit(10).Order("id desc").Find(&res1) //SELECT * FROM `teachers` WHERE name='游' AND id=1 ORDER BY id desc LIMIT 10
+	fmt.Println(res1)
 
 }
