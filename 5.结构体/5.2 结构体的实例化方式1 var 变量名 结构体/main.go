@@ -13,6 +13,7 @@ type Student struct {
 }
 func main() {
 	var s Student //声明一个结构体对象 ,值类型，默认开辟空间，字段赋予零值 或者叫实例化
+	//var s Student{} 不能这样初始化
 	fmt.Println(s)
 	//赋值
 	s.sid =1001

@@ -33,6 +33,11 @@ func test5(a,b int)(sum,sub int){
 	sub = a-b
 	return //即使不写返回值规定了返回值 也会返回
 }
+
+func test6(a int){
+	fmt.Println(a)
+	return
+}
 func main() {
 	//无返回值将报错
 	//t :=test()
@@ -51,4 +56,6 @@ func main() {
 
 	// test5
 	fmt.Println(test5(1,2))
+	//test6
+	//fmt.Println(test6(1))
 }

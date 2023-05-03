@@ -27,4 +27,6 @@ func main() {
 	 _= json.Unmarshal(c ,&info) //c[]byte,&info还需要指针类型的来接收
 	 fmt.Println(info,reflect.TypeOf(info)) //[1 2 3] []int
 
+	 //应该使用结构体
+
 }
