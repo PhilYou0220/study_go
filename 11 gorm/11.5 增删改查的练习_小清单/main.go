@@ -17,7 +17,10 @@ type Todo struct {
 	Title  string `form:"title" json:"title" gorm:"column:title;comment:名称"` // 待办事项名称
 	Status bool   `json:"status" gorm:"comment:0未完成1已完成"`             // 是否完成的状态
 }
+type Account struct {
+	gorm.Model
 
+}
 var db *gorm.DB
 
 func DbInit()  {
