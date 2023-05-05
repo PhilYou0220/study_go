@@ -20,6 +20,11 @@ type Todo struct {
 type Account struct {
 	gorm.Model
 
+	Name string `gorm:"type:varchar(255);column:name;not null;unique;comment:用户名称"` //唯一标识
+	NickName string `gorm:"type:varchar(255);comment:用户昵称"` //昵称
+	PassWord string `gorm:"column:pass_word;comment:密码;type:text"`
+	Status *bool `gorm:"column:status;comment:状态"`
+
 }
 var db *gorm.DB
 
@@ -63,7 +68,9 @@ func main() {
 	}
 	//2初始化数据库并获取数据库对象
 	DbInit()
-	db.AutoMigrate(&Todo{})
+	//db.AutoMigrate(&Todo{})
+	//db.AutoMigrate(&Account{})
+
 	//3业务处理每个接口都这么写
 	//3.1获取参数
 	//3.2编写业务逻辑
