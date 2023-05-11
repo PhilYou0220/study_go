@@ -59,9 +59,9 @@ func main() {
 	r.GET("/index", func(c *gin.Context) {
 		c.HTML(200, "index.html", nil)
 	})
-	r.POST("/login",loginHandler)
+	r.POST("/login",loginHandler)  //这些小写开头的函数能被访问到是因为是在同一个包（main）中
 	r.POST("/register", registerHandler)
-	g := r.Group("/api/v1")
+	g := r.Group("/api/v1",middleware)
 	{
 		g.POST("/todo", createTodoHandler)
 		g.PUT("/todo", updateTodoHandler)
