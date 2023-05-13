@@ -6,7 +6,7 @@ import (
 	"time"
 )
 
-const TokenExpireDuration = time.Second * 10
+const TokenExpireDuration = time.Second * 100
 // MySecret 用于加盐的字符串
 var MySecret = []byte("夏天夏天悄悄过去")
 type MyClaims struct {

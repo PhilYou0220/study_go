@@ -70,8 +70,8 @@ func main() {
 	}
 	//2初始化数据库并获取数据库对象
 	DbInit()
-	db.AutoMigrate(&Todo{})
-	db.AutoMigrate(&Account{})
+	//db.AutoMigrate(&Todo{})
+	//db.AutoMigrate(&Account{})
 
 	//3业务处理每个接口都这么写
 	//3.1获取参数
