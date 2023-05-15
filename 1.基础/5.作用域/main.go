@@ -1,6 +1,9 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+	"golang.org/x/crypto/ssh/agent"
+)
 
 //func main() {
 //	name :="游"
@@ -32,6 +35,9 @@ func main() {
 		fmt.Println(age)
 		fmt.Println(name)
 	}
+	//fmt.Println(age)
+	age := 20 //在同一个函数中在不同的作用域内定义相同名称的变量是可以的 比如age在 if条件里的age和外部的age互不相关
+	fmt.Println(age)
 	fmt.Println(name)
 	fmt.Println(school)
 	fmt.Println(v1, v2, v3)

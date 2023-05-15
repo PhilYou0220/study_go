@@ -23,6 +23,7 @@ func main() {
 		//获取路由 此方法只获取路由 可以对路由做权限
 		fmt.Println(context.FullPath()) //book
 		//某个请求头
+		//context.Request.Header.Get("Authorization")
 		fmt.Println("user-agent: ", context.GetHeader("user-agent")) //Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/111.0.0.0 Safari/537.36
 		//所有请求头
 		fmt.Println("所有头：", context.Request.Header) //map[Accept-Encoding:[gzip, deflate, br]]

@@ -111,8 +111,13 @@ func main() {
 	name := "游"
 	db.Model(&Teacher{}).Where("name=?",name).Where("id=?",1).Limit(10).Order("id desc").Find(&res1) //SELECT * FROM `teachers` WHERE name='游' AND id=1 ORDER BY id desc LIMIT 10
 	fmt.Println(res1)
+	//db.Table("users").Where("name=?",name).Find(&res1) //也可以
 	/*更新*/
 	db.Model(&Teacher{}).Where(" id= ?", 1).Update("pwd", "456")
+	//db.Model(&user).Update("name","hello")
+	//其中user 结构体必须包含主键,不然会全表更新
+	//如果不包含主键，就会变成更新表里所有的数据如果事先没有一个包含主键的结构体，想要去更新一条记录应该用where("user_id")指定查询条件
+
 	/*删除*/
 
 }
