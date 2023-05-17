@@ -27,6 +27,18 @@ func createTodoHandler(ctx *gin.Context) {
 	}
 
 	//3.2编写业务逻辑
+	// 获取ctx内的用户身份
+	v,_ := ctx.Get(CtxUIdKey)
+	uid := v.(int64)
+	if uid<=0{
+		ctx.JSON(200, gin.H{
+			"code": 1,
+			"msg":  "登录异常",
+		})
+		return
+	}
+	//拿到uid之后赋值给结构体
+	todo.Uid=uid
 	res := db.Create(&todo)
 	if res.Error != nil {
 		fmt.Println("db.Create failed", err)

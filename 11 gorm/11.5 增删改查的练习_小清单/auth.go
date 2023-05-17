@@ -25,7 +25,8 @@ func loginHandler(ctx *gin.Context) {
 			Msg:  err.Error(),
 		})
 	}
-	//2 逻辑处理 使用用户名和密码
+	//2 逻辑处理
+	//使用用户名和密码
 	var user Account
 	if err := db.Model(&Account{}).Where("name=? and pass_word=?", param.Name, md5Secret(param.Password)).Find(&user).Error;err != nil {
 		//没查到

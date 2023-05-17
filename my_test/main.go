@@ -81,7 +81,7 @@ func createZero(mq *rabbit.RabbitMQ) {
 func createOne(mq *rabbit.RabbitMQ) {
 	for i := 0; i < 4; i++ {
 		m := map[string]string{
-			"MN": "CDHT5101080007",
+			"MN": "CDHT5101080185",
 			"w11019-Flag": "N&&",
 			"w11019-Avg": "1",
 			"DataTime": time.Now().Add(time.Hour * time.Duration(-1*i)).Format("20060102150400"),
@@ -90,13 +90,13 @@ func createOne(mq *rabbit.RabbitMQ) {
 		fmt.Println("send", string(buf))
 		mq.Produce("sensor").QeueuName("water_sensor").Publish(buf, "water.warn.event")
 		m = map[string]string{
-			"MN": "CDHT5101080007",
+			"MN": "CDHT5101080185",
 			"w21003-Flag": "N&&",
 			"w21003-Avg": "1." + fmt.Sprint(i),
 			"DataTime": time.Now().Add(time.Hour * time.Duration(-1*i)).Format("20060102150400"),
 		}
 		m = map[string]string{
-			"MN": "CDHT5101080007",
+			"MN": "CDHT5101080185",
 			"w11019-Flag": "N&&",
 			"w11019-Avg": "9." + fmt.Sprint(i),
 			"DataTime": time.Now().Add(time.Hour * time.Duration(-1*i)).Format("20060102150400"),
@@ -105,7 +105,7 @@ func createOne(mq *rabbit.RabbitMQ) {
 		fmt.Println("send", string(buf))
 		mq.Produce("sensor").QeueuName("water_sensor").Publish(buf, "water.warn.event")
 		m = map[string]string{
-			"MN": "CDHT5101080007",
+			"MN": "CDHT5101080185",
 			"w21003-Flag": "N&&",
 			"w21003-Avg": "9." + fmt.Sprint(i),
 			"DataTime": time.Now().Add(time.Hour * time.Duration(-1*i)).Format("20060102150400"),

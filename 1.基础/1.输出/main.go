@@ -1,6 +1,9 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+	"reflect"
+)
 
 func main() {
 	//print("内置print")
@@ -31,4 +34,6 @@ func main() {
 	fmt.Printf("%v\n",test1) //map[age:18 name:you]
 	fmt.Printf("%+v\n",test1) //map[age:18 name:you]
 	fmt.Printf("%#v\n",test1) //map[string]string{"age":"18", "name":"you"}
+	fmt.Printf("%T",test1) //map[string]string 打印他们的数据类型 效果和 reflect.TypeOf一样
+	fmt.Println(reflect.TypeOf(test1)) //map[string]string
 }
