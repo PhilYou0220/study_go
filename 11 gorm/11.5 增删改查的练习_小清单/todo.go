@@ -28,8 +28,9 @@ func createTodoHandler(ctx *gin.Context) {
 
 	//3.2编写业务逻辑
 	// 获取ctx内的用户身份
-	v,_ := ctx.Get(CtxUIdKey)
+	v,_ := ctx.Get(CtxUIdKey) //返回的是一个接口类型
 	uid := v.(int64)
+	fmt.Println("uid是：",uid)
 	if uid<=0{
 		ctx.JSON(200, gin.H{
 			"code": 1,
@@ -61,7 +62,18 @@ func getTodoHandler(ctx *gin.Context) {
 
 	//3.2 处理业务逻辑 全部应该是个切片
 	var todo []Todo
-	if err:=db.Model(&Todo{}).Find(&todo).Error;err!=nil{ //注意是返回值的error
+	//查询用户
+	v,_ := ctx.Get(CtxUIdKey) //返回的是一个接口类型
+	uid := v.(int64)
+	if uid<=0{
+		ctx.JSON(200, gin.H{
+			"code": 1,
+			"msg":  "token异常",
+		})
+		return
+	}
+
+	if err:=db.Model(&Todo{}).Where("uid=?",uid).Find(&todo).Error;err!=nil{ //注意是返回值的error
 		fmt.Println("查询出错！！！",err)
 		ctx.JSON(200, gin.H{
 			"code": -1,
@@ -93,7 +105,18 @@ func updateTodoHandler(ctx *gin.Context) {
 	//2业务逻辑
 	// 先检查数据（todo.ID）是否存在
 	// 拿请求传过来的id去数据库里查询是否存在这条记录
-	if err := db.First(&Todo{}, todo.ID).Error; err != nil {
+	//查询用户
+	v,_ := ctx.Get(CtxUIdKey) //返回的是一个接口类型
+	uid := v.(int64)
+	if uid<=0{
+		ctx.JSON(200, gin.H{
+			"code": 1,
+			"msg":  "token异常",
+		})
+		return
+	}
+
+	if err := db.Where("uid=?",uid).First(&Todo{}, todo.ID).Error; err != nil {
 		// if err == gorm.ErrRecordNotFound {
 		if errors.Is(err, gorm.ErrRecordNotFound) {
 			// 没有这条记录
@@ -113,7 +136,7 @@ func updateTodoHandler(ctx *gin.Context) {
 
 	// 代码能执行到这里，说明数据库中确实存在 todo.ID 对应的记录
 	// 接下来就去更新这条记录
-	res:=db.Model(&Todo{}).Where("id = ?", todo.ID).Update("status", todo.Status)
+	res:=db.Model(&Todo{}).Where("id = ? and uid=?", todo.ID,uid).Update("status", todo.Status)
 	if res.Error != nil{
 		fmt.Println("updateTodoHandler：更新至数据库失败", res.Error)
 		ctx.JSON(200, gin.H{
@@ -144,7 +167,18 @@ func deleteTodoHandler(ctx *gin.Context) {
 		})
 	}
 	//2业务处理
-	if err:=db.Model(&Todo{}).First(&todo).Error;err!=nil{
+
+	v,_ := ctx.Get(CtxUIdKey) //返回的是一个接口类型
+	uid := v.(int64)
+	if uid<=0{
+		ctx.JSON(200, gin.H{
+			"code": 1,
+			"msg":  "token异常",
+		})
+		return
+	}
+
+	if err:=db.Model(&Todo{}).Where("uid=?",uid).First(&todo).Error;err!=nil{
 		if errors.Is(err, gorm.ErrRecordNotFound) {
 			// 没有这条记录
 			ctx.JSON(200, gin.H{
@@ -162,7 +196,7 @@ func deleteTodoHandler(ctx *gin.Context) {
 	}
 	// 代码能执行到这里，说明数据库中确实存在 todo.ID 对应的记录
 	// 接下来就去更新这条记录
-	if err := db.Delete(&Todo{}, id).Error; err != nil {
+	if err := db.Where("uid=?",uid).Delete(&Todo{}, id).Error; err != nil {
 		ctx.JSON(200, gin.H{
 			"code": 1,
 			"msg":  "服务端异常，请稍后再试",

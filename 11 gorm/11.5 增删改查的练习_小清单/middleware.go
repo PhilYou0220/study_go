@@ -46,8 +46,8 @@ func middleware(ctx *gin.Context) {
 		return
 	}
 	//把用户名和uid写入ctx对象 k,v
-	ctx.Set(CtxUIdKey,mc.Name)
-	ctx.Set(CtxNameKey,mc.Uid)
+	ctx.Set(CtxUIdKey,mc.Uid)
+	ctx.Set(CtxNameKey,mc.Name)
 
 
 	//3返回参数
