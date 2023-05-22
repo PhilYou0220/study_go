@@ -20,7 +20,7 @@ type MyClaims struct {
 func GenToken(uid int64,name string) (string, error) {
 	// 创建一个我们自己的声明
 	claims := MyClaims{
-		uid, // 自定义字段
+		uid, // 自定义字段,传进来是啥就是啥
 		name,
 		jwt.StandardClaims{
 			ExpiresAt: time.Now().Add(TokenExpireDuration).Unix(), // 过期时间
@@ -36,7 +36,7 @@ func GenToken(uid int64,name string) (string, error) {
 // ParseToken 解析JWT
 func ParseToken(tokenString string) (*MyClaims, error) {
 	// 解析token
-	token, err := jwt.ParseWithClaims(tokenString, &MyClaims{}, func(token *jwt.Token) (i interface{}, err error) {
+	token, err := jwt.Parse(tokenString, func(token *jwt.Token) (i interface{}, err error) {
 		return MySecret, nil //加盐字符串通过这个函数返回
 	})
 	if err != nil {
