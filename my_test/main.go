@@ -38,7 +38,7 @@ import (
 "encoding/json"
 "code.shomes.cn/pkg/mqcli/rabbit"
 )
-
+// 水质设备上下线及
 // 检查库 last_cam_online_log
 // water_quality
 func main() {
@@ -79,40 +79,51 @@ func createZero(mq *rabbit.RabbitMQ) {
 	}
 }
 func createOne(mq *rabbit.RabbitMQ) {
-	for i := 0; i < 4; i++ {
+	for i := 1; i >0; i-- {
+		//  氨氮 高猛酸钾  氨氮>2 高猛酸钾大于15 就是劣v
 		m := map[string]string{
 			"MN": "CDHT5101080185",
-			"w11019-Flag": "N&&",
-			"w11019-Avg": "1",
+			"w11019-Flag": "", //
+			"w11019-Avg": "11.19", //高猛酸钾和cod
 			"DataTime": time.Now().Add(time.Hour * time.Duration(-1*i)).Format("20060102150400"),
 		}
 		buf, _ := json.Marshal(&m)
 		fmt.Println("send", string(buf))
 		mq.Produce("sensor").QeueuName("water_sensor").Publish(buf, "water.warn.event")
+
+		//4类水质 氨氮
 		m = map[string]string{
 			"MN": "CDHT5101080185",
-			"w21003-Flag": "N&&",
-			"w21003-Avg": "1." + fmt.Sprint(i),
-			"DataTime": time.Now().Add(time.Hour * time.Duration(-1*i)).Format("20060102150400"),
-		}
-		m = map[string]string{
-			"MN": "CDHT5101080185",
-			"w11019-Flag": "N&&",
-			"w11019-Avg": "9." + fmt.Sprint(i),
+			"w21003-Flag": "0.1", //未知
+			"w21003-Avg": "1." + fmt.Sprint(i), //氨氮
+			//"w21003-Avg": "0.1",//氨氮
 			"DataTime": time.Now().Add(time.Hour * time.Duration(-1*i)).Format("20060102150400"),
 		}
 		buf, _ = json.Marshal(&m)
 		fmt.Println("send", string(buf))
 		mq.Produce("sensor").QeueuName("water_sensor").Publish(buf, "water.warn.event")
-		m = map[string]string{
-			"MN": "CDHT5101080185",
-			"w21003-Flag": "N&&",
-			"w21003-Avg": "9." + fmt.Sprint(i),
-			"DataTime": time.Now().Add(time.Hour * time.Duration(-1*i)).Format("20060102150400"),
-		}
-		buf, _ = json.Marshal(&m)
-		fmt.Println("send", string(buf))
-		mq.Produce("sensor").QeueuName("water_sensor").Publish(buf, "water.warn.event")
+
+		//4类水质 高猛酸钾
+		//m := map[string]string{
+		//	"MN": "CDHT5101080185",
+		//	"w11019-Flag": "2", //未知
+		//	"w11019-Avg": "9." + fmt.Sprint(i), //高猛酸钾
+		//	"DataTime": time.Now().Add(time.Hour * time.Duration(-1*i)).Format("20060102150400"),
+		//}
+		//buf, _ := json.Marshal(&m)
+		//fmt.Println("send", string(buf))
+		//mq.Produce("sensor").QeueuName("water_sensor").Publish(buf, "water.warn.event")
+
+		//6类水质
+		//m := map[string]string{
+		//	"MN": "CDHT5101080185",
+		//	"w21003-Flag": "0.3",
+		//	"w21003-Avg": "9." + fmt.Sprint(i), //氨氮
+		//	"DataTime": time.Now().Add(time.Hour * time.Duration(-1*i)).Format("20060102150400"),
+		//}
+		//buf, _ := json.Marshal(&m)
+		//fmt.Println("send", string(buf))
+		//mq.Produce("sensor").QeueuName("water_sensor").Publish(buf, "water.warn.event")
 
 		time.Sleep(time.Second * 2)
 
