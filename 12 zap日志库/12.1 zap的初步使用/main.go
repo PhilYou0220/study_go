@@ -5,9 +5,9 @@ import "go.uber.org/zap"
 
 func main(){
 	//获取logger对象
-	//zap.NewExample()
-	//zap.NewDevelopment()
-	log, _ := zap.NewProduction()
+	//zap.NewExample() //示例
+	//zap.NewDevelopment() //开发环境
+	log, _ := zap.NewProduction() //用于生产环境
 
 	var (
 		name string
@@ -25,7 +25,7 @@ func main(){
 
 	//需要传个字符串，然后zap.type指定参数的类型，这也是他快的原因
 	log.Info("日志信息",zap.String("name",name),
-		zap.Ints("list",list),
+		zap.Ints("list",list),//int类型的切片
 		zap.Int64("age",age),
 		zap.Any("any",nameList), //任意类型
 	//{"level":"info","ts":1684843048.9437547,"caller":"12 zap日志库/main.go:27","msg":"日志信息","name":"张三","list":[0,1,2,3,4,5,6,7,8,9],"age":16,"any":["李四","","","",""]}
