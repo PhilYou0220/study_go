@@ -13,7 +13,10 @@ func main() {
 	fmt.Println(sl1,len(sl1),cap(sl1)) //[0 0 0 0 0] 5 5
 	var s = make([]int,5,10) //分配内存，扩展空间没有
 	fmt.Println(s)
-	s[4]=100
+	s[4]=100//使用了make函数 若想对赋予零值的赋值 使用下标赋值
 	fmt.Println(s) //[0 0 0 0 100]
+
+
+
 
 }
