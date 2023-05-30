@@ -25,7 +25,7 @@ func main()  {
 	//3、设置日志级别
 	//创建zapcore
 	core :=zapcore.NewCore(encoder,writeSyncer,zapcore.InfoLevel)
-	/*
+	/*多核心
 	支持从配置文件读取
 	s := "info"
 	level,err:=zapcore.ParseLevel(s)
