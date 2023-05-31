@@ -13,7 +13,7 @@ func main()  {
 	encodconf := zap.NewProductionEncoderConfig()
 	encodconf.TimeKey = "time" //更改 {"ts":1684843048.9437547}
 
-	encodconf.EncodeTime =zapcore.ISO8601TimeEncoder //设置日期显示
+	encodconf.EncodeTime =zapcore.ISO8601TimeEncoder //设置日期显示格式
 
 	encoder :=zapcore.NewJSONEncoder(encodconf) //zap.NewProductionEncoderConfig()一些json
 	//2、WriteSyncer（写到哪里）
