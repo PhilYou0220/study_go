@@ -12,8 +12,10 @@ func main()  {
 	//1、encoder
 	encodconf := zap.NewProductionEncoderConfig()
 	encodconf.TimeKey = "time" //更改 {"ts":1684843048.9437547}
-	encoder :=zapcore.NewJSONEncoder(zap.NewProductionEncoderConfig()) //zap.NewProductionEncoderConfig()一些json
 
+	encodconf.EncodeTime =zapcore.ISO8601TimeEncoder //设置日期显示
+
+	encoder :=zapcore.NewJSONEncoder(encodconf) //zap.NewProductionEncoderConfig()一些json
 	//2、WriteSyncer（写到哪里）
 	//新建文件
 	file, _ := os.OpenFile("./test.log",os.O_CREATE|os.O_APPEND|os.O_WRONLY,0644)
@@ -25,7 +27,7 @@ func main()  {
 	//创建zapcore
 	core :=zapcore.NewCore(encoder,writeSyncer,zapcore.InfoLevel)
 
-	logger:=zap.New(core)
+	logger:=zap.New(core,zap.AddCaller())//加上日志信息的行数
 	var (
 		name string
 		age  int64
