@@ -1,0 +1,4 @@
+2023-05-31T22:36:00.490+0800	DEBUG	12.4 日志切割/main.go:47	Trying to hit GET request for www.sogo.com
+2023-05-31T22:36:00.523+0800	ERROR	12.4 日志切割/main.go:50	Error fetching URL www.sogo.com : Error = Get "www.sogo.com": unsupported protocol scheme ""
+2023-05-31T22:36:00.523+0800	DEBUG	12.4 日志切割/main.go:47	Trying to hit GET request for http://www.sogo.com
+2023-05-31T22:36:01.115+0800	INFO	12.4 日志切割/main.go:52	Success! statusCode = 200 OK for URL http://www.sogo.com
