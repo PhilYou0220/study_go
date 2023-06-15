@@ -5,6 +5,10 @@ import (
 	"reflect"
 	"time"
 )
+/*
+纵观python\golang
+*/
+
 
 // timezoneDemo 时区示例
 func timezoneDemo() {
@@ -92,7 +96,7 @@ func main() {
 	//6定时器选了chan再说
 
 	//7(时间格式转格式化字符串)
-	fmt.Println(now.Format("2006-01-02 15:04:05")) //2023-06-12 23:27:56
+	//fmt.Println(now.Format("2006-01-02 15:04:05")) //2023-06-12 23:27:56
 
 	//时间戳转时间格式
 	timestampDemo2(1686587075)
@@ -101,4 +105,21 @@ func main() {
 	//time.ParseInLocation
 	//时间格式转时间戳
 	//fmt.Println(timeObj.Unix())
+	//time.ParseInLocation()
+	fmt.Println(time.Now().Format(time.RFC3339))
+	fStr:="2006-01-02 15:04:05"
+    t,_:=	time.Parse(time.RFC3339,"2023-06-13T17:39:37+06:00")
+	fmt.Println(1111,t.Format(fStr))
+
+	tt,_:=time.ParseInLocation(time.RFC3339,"2023-06-13T17:39:37+00:00",time.Local)
+	fmt.Println(2222,tt.Format(fStr))
+
+
+	//8Local()
+	//time.Local() 函数会返回当前时间的本地时间戳
+	//fmt.Println(time.Now())
+	//fmt.Println(time.Now().Local())
+	//fmt.Println(time.Now().Format("2006-01-02 15:04:05"))
+	//fmt.Println(time.Local())
+
 }
