@@ -1,0 +1,28 @@
+syntax = "proto3";  // 申明proto3类型；如果不这样写将使用v2;必须写在首行
+message SearchRequest{//message 关键字类似于结构体
+  string query = 1; //先写类型 再写名称 再写编号（指定位置）从1开始 分号结尾
+}
+
+message Student{
+  reserved 4; //reserve不要使用2这个字段了
+  string name = 1;
+  int32 age = 2;
+  repeated int32 score = 3;//[]int repeated可以传多个值 相当于切片类型 go代码可以传多个值
+  bytes aim=5; //[]byte
+}
+
+message SearchResponse {
+  message Result {
+    string url = 1;
+    string title = 2;
+    repeated string snippets = 3;
+  }
+
+  repeated Result results = 1;
+}
+//也可以把message Result拿到外面来
+//message Result {
+//  string url = 1;
+//  string title = 2;
+//  repeated string snippets = 3;
+//}
